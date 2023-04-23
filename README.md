@@ -1,5 +1,7 @@
 # Steeleye Assignment Front End :- 
 
+You can check the output from the given link :- https://reliable-beijinho-a32d96.netlify.app/
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 **Quetion 1 :- Explain what the simple List component does.**
