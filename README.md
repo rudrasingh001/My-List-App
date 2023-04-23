@@ -55,53 +55,102 @@ The given code is a React component that renders a list of items and allows the 
 **Here is the optimised code :-**
 
 ```
-import React, { useState, useEffect, useCallback, memo } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, memo } from "react";
+import "./List.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import PropTypes from "prop-types";
 
-// Single List Item
-const SingleListItem = memo(({ index, isSelected, onClickHandler, text }) => {
+
+const SingleListItem = memo(({ index, text, isSelected, onClick, onDelete }) => {
+  const handleDelete = () => {
+    onDelete(index);
+    toast.error(`Deleted "${text}"`);
+  };
+
   return (
     <li
-      style={{ backgroundColor: isSelected ? 'green' : 'red' }}
-      onClick={() => onClickHandler(index)}
+      className="list-item"
+      style={{ backgroundColor: isSelected ? "green" : "red" }}
+      onClick={() => onClick(index)}
     >
       {text}
+      <div className="item-buttons">
+        <button className="delete-button" onClick={handleDelete}>
+          Delete
+        </button>
+      </div>
     </li>
   );
 });
 
 SingleListItem.propTypes = {
-  index: PropTypes.number,
-  isSelected: PropTypes.bool,
-  onClickHandler: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
+  isSelected: PropTypes.bool.isRequired,
+  onClick: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
-// List Component
-const List = memo(({ items }) => {
-  const [selectedIndex, setSelectedIndex] = useState(null);
+const List = memo(({ items, updateItems }) => {
+  const [selectedIndexes, setSelectedIndexes] = useState([]);
+  const [isMultiSelectMode, setIsMultiSelectMode] = useState(false);
 
-  useEffect(() => {
-    setSelectedIndex(null);
-  }, [items]);
+  const handleClick = (index) => {
+    const newIndexes = isMultiSelectMode ? [...selectedIndexes] : [];
+    if (!newIndexes.includes(index)) {
+      newIndexes.push(index);
+      toast.success(`Selected "${items[index].text}"`);
+    } else {
+      newIndexes.splice(newIndexes.indexOf(index), 1);
+      toast.warning(`Deselected "${items[index].text}"`);
+    }
+    setSelectedIndexes(newIndexes);
+  };
 
-  const handleClick = useCallback(index => {
-    setSelectedIndex(index);
-  }, []);
+  const handleDelete = (index) => {
+    const itemToDelete = items[index].text;
+    const newItems = items.filter((item, i) => i !== index);
+    setSelectedIndexes(selectedIndexes.filter((i) => i !== index));
+    updateItems(newItems);
+    toast.error(`Deleted "${itemToDelete}"`);
+  };
+
+  const handleClear = () => setSelectedIndexes([]);
+  const handleSelectAll = () => setSelectedIndexes(items.map((_, i) => i));
+  const handleModeChange = () => setIsMultiSelectMode((prev) => !prev);
 
   return (
-    <ul style={{ textAlign: 'left' }}>
-      {items &&
-        items.map((item, index) => (
+    <div className="list-container">
+      <div className="selection-buttons mode-btn">
+        {isMultiSelectMode && (
+          <>
+            <button className="list-control-button" onClick={handleClear}>
+              Clear
+            </button>
+            <button className="list-control-button" onClick={handleSelectAll}>
+              Select All
+            </button>
+          </>
+        )}
+        <button className="list-control-button " onClick={handleModeChange}>
+          {isMultiSelectMode ? "Single Select" : "Multi-Select"}
+        </button>
+      </div>
+      <ul className="list">
+        {items.map((item, index) => (
           <SingleListItem
-            onClickHandler={handleClick}
-            text={item.text}
-            index={index}
-            isSelected={selectedIndex === index}
             key={index}
+            index={index}
+            text={item.text}
+            isSelected={selectedIndexes.includes(index)}
+            onClick={handleClick}
+            onDelete={handleDelete}
           />
         ))}
-    </ul>
+      </ul>
+      <ToastContainer position="top-right" />
+    </div>
   );
 });
 
@@ -110,12 +159,101 @@ List.propTypes = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
     })
-  ),
-};
-
-List.defaultProps = {
-  items: [],
+  ).isRequired,
+  updateItems: PropTypes.func.isRequired,
 };
 
 export default List;
+
+```
+**List.css**
+
+```
+
+.list-box {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
+}
+
+.list-item:hover {
+  background-color: #f9f9f9;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item .item-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.list-item .item-buttons button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff7f50;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list-item .item-buttons button:hover {
+  background-color: #ff6347;
+}
+
+.list-item.selected {
+  background-color: #f0f8ff;
+}
+
+.selection-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f0f8ff;
+}
+
+.list-control-button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ff7f50;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.list-control-button:hover {
+  background-color: #ff6347;
+}
+
+.mode-btn {
+  border-bottom: 1px solid #eee;
+}
+
+
+
 ```
