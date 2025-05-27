@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>TestNG:  Default test</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>Default test</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>1/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Tue May 27 15:38:01 IST 2025</td>
+</tr>
+<tr><td>Total time:</td><td>201 seconds (201813 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='booksWagon.Runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: booksWagon.Runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Validate login with data from Excel", "Optional[User Login Functionality]"</td>
+<td><div><pre>java.lang.AssertionError: Expected login to succeed, but it failed expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at booksWagon.StepDefinition.LoginStepDefinition.fetchDataAndLogin(LoginStepDefinition.java:194)
+	at ✽.User fetches login data from Excel and performs login(file:///C:/Users/rudra.singh/Downloads/MainProj-main%20(1)/MainProj-main/BooksWagon/BooksWagon/src/test/resources/Features/02_Login.feature:6)
+</pre></div><a href='#' onClick='toggleBox("stack-trace383852959", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace383852959'><pre>java.lang.AssertionError: Expected login to succeed, but it failed expected [true] but found [false]
+	at org.testng.Assert.fail(Assert.java:111)
+	at org.testng.Assert.failNotEquals(Assert.java:1578)
+	at org.testng.Assert.assertTrue(Assert.java:57)
+	at booksWagon.StepDefinition.LoginStepDefinition.fetchDataAndLogin(LoginStepDefinition.java:194)
+	at ✽.User fetches login data from Excel and performs login(file:///C:/Users/rudra.singh/Downloads/MainProj-main%20(1)/MainProj-main/BooksWagon/BooksWagon/src/test/resources/Features/02_Login.feature:6)
+</pre></div></td>
+<td>22</td>
+<td>booksWagon.Runners.TestRunner@5b799640</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='booksWagon.Runners.TestRunner.runScenario()'><b>runScenario</b><br>Test class: booksWagon.Runners.TestRunner<br>Test method: Runs Cucumber Scenarios<br>Parameters: "Validate signup with data from Excel", "Optional[User Signup Functionality]"</td>
+<td></td>
+<td>178</td>
+<td>booksWagon.Runners.TestRunner@5b799640</td></tr>
+</table><p>
+</body>
+</html>

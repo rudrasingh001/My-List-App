@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="2" passed="1" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-05-27T15:38:01 IST" name="Default suite" finished-at="2025-05-27T15:41:22 IST" duration-ms="201813">
+    <groups>
+      <group name="cucumber">
+        <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:booksWagon.Runners.TestRunner@5b799640]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
+      </group> <!-- cucumber -->
+    </groups>
+    <test started-at="2025-05-27T15:38:01 IST" name="Default test" finished-at="2025-05-27T15:41:22 IST" duration-ms="201813">
+      <class name="booksWagon.Runners.TestRunner">
+        <test-method is-config="true" signature="setUpClass()[pri:0, instance:booksWagon.Runners.TestRunner@5b799640]" started-at="2025-05-27T15:38:01 IST" name="setUpClass" finished-at="2025-05-27T15:38:01 IST" duration-ms="310" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpClass -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:booksWagon.Runners.TestRunner@5b799640]" started-at="2025-05-27T15:38:01 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-05-27T15:40:59 IST" duration-ms="178587" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Validate signup with data from Excel"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[User Signup Functionality]"]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:booksWagon.Runners.TestRunner@5b799640]" started-at="2025-05-27T15:41:00 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-05-27T15:41:22 IST" duration-ms="22840" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA["Validate login with data from Excel"]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA["Optional[User Login Functionality]"]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[Expected login to succeed, but it failed expected [true] but found [false]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: Expected login to succeed, but it failed expected [true] but found [false]
+at org.testng.Assert.fail(Assert.java:111)
+at org.testng.Assert.failNotEquals(Assert.java:1578)
+at org.testng.Assert.assertTrue(Assert.java:57)
+at booksWagon.StepDefinition.LoginStepDefinition.fetchDataAndLogin(LoginStepDefinition.java:194)
+at ✽.User fetches login data from Excel and performs login(file:///C:/Users/rudra.singh/Downloads/MainProj-main%20(1)/MainProj-main/BooksWagon/BooksWagon/src/test/resources/Features/02_Login.feature:6)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- runScenario -->
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:booksWagon.Runners.TestRunner@5b799640]" started-at="2025-05-27T15:41:22 IST" name="tearDownClass" finished-at="2025-05-27T15:41:22 IST" duration-ms="11" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownClass -->
+      </class> <!-- booksWagon.Runners.TestRunner -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
